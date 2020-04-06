@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>快速入口</title>
+    <link href="https://cdn.bootcss.com/element-ui/2.13.0/theme-chalk/index.css" rel="stylesheet">
+    <style>
+        .el-tabs--top {
+            margin-top: 60px;
+        }
+        .header {
+            height: 60px;
+            height: 60px;
+            line-height: 60px;
+            font-size: 25px;
+            color: tomato;
+        }
+    </style>
+</head>
+
+<body>
+    <script src="https://cdn.bootcss.com/vue/2.6.11/vue.min.js"></script>
+    <script src="https://cdn.bootcss.com/element-ui/2.13.0/index.js"></script>
+
+    <div id="app">
+        <div class="header">
+            <p>凡预项目快速入口</p>
+        </div>
+        <el-tabs v-model="activeName" type="card" @tab-click="handleClick">
+            <el-tab-pane label="测试环境" name="1">
+                <transition name="el-fade-in-linear">
+                    <el-table v-show="activeName==1" :border="true" :data="tableData" style="width: 100%">
+                        <el-table-column prop="name" label="项目名称" width="300" align="center">
+                        </el-table-column>
+                        <el-table-column prop="url" label="地址" align="center">
+                            <template slot-scope="scope">
+                                <a :href="scope.row.url">{{scope.row.url}}</a>
+                            </template>
+                        </el-table-column>
+                        <el-table-column prop="date" label="更新日期" width="300" align="center">
+                        </el-table-column>
+                    </el-table>
+                </transition>
+            </el-tab-pane>
+            <el-tab-pane label="正式环境" name="2">
+                <transition name="el-fade-in-linear">
+                    <el-table v-show="activeName==2" :border="true" :data="tableData" style="width: 100%">
+                        <el-table-column prop="name" label="项目名称" width="300" align="center">
+                        </el-table-column>
+                        <el-table-column prop="url" label="地址" align="center">
+                            <template slot-scope="scope">
+                                <a :href="scope.row.url">{{scope.row.url}}</a>
+                            </template>
+                        </el-table-column>
+                        <el-table-column prop="date" label="更新日期" width="300" align="center">
+                        </el-table-column>
+                    </el-table>
+                </transition>
+            </el-tab-pane>
+        </el-tabs>
+    </div>
+    <script>
+        var app = new Vue({
+            el: '#app',
+            data: {
+                activeName: '1',
+                tableData: [{
+                    date: '2020-4-08',
+                    name: '办案端',
+                    url: 'http://10.1.0.7:3000/handlingCases/#/login'
+                }, {
+                    date: '2020-4-08',
+                    name: '立案端',
+                    url: 'http://10.1.0.7:3000/demo'
+                }]
+            },
+            methods: {
+                handleClick(tab) {
+                    console.log(tab);
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>
